@@ -1,6 +1,6 @@
 --[[
 
-	order.
+	Order
 
 	A configurable module-based framework for Roblox, written by @ChiefWildin.
 	Full documentation - https://michaeldougal.github.io/order/
@@ -22,7 +22,7 @@ local Settings = require(script:WaitForChild("Settings")) ---@module Settings
 
 local Order = {
 	PlaceType = Settings.PlaceTypes[game.PlaceId] or "Generic",
-	Version = "3.0.0",
+	Version = "3.0.1",
 }
 
 type Initializer = Settings.Initializer
