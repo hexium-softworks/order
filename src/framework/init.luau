@@ -572,6 +572,14 @@ Order.IndexModulesOf(PackageContext, true)
 if RunService:IsServer() then
 	local ServerPackageContext = ServerStorage:FindFirstChild("ServerPackages")
 		or ServerScriptService:FindFirstChild("ServerPackages")
+
+	if not ServerPackageContext then
+		ServerPackageContext = ServerStorage:WaitForChild("ServerPackages", 5)
+		if not ServerPackageContext then
+			ServerPackageContext = ServerScriptService:WaitForChild("ServerPackages", 5)
+		end
+	end
+
 	if ServerPackageContext then
 		Order.IndexModulesOf(ServerPackageContext, true)
 	end
