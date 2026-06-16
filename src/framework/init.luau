@@ -12,6 +12,8 @@
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
+local ServerStorage = game:GetService("ServerStorage")
+local ServerScriptService = game:GetService("ServerScriptService")
 
 -- The metatable that provides functionality for detecting bare code referencing
 -- cyclic dependencies
@@ -566,6 +568,14 @@ end
 IndexContext(LocalContext)
 IndexContext(SharedContext)
 Order.IndexModulesOf(PackageContext, true)
+
+if RunService:IsServer() then
+	local ServerPackageContext = ServerStorage:FindFirstChild("ServerPackages")
+		or ServerScriptService:FindFirstChild("ServerPackages")
+	if ServerPackageContext then
+		Order.IndexModulesOf(ServerPackageContext, true)
+	end
+end
 
 local function IndexAssetModules(root: Instance)
 	for _, child: Instance in root:GetChildren() do
